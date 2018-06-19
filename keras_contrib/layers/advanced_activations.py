@@ -383,3 +383,149 @@ class SineReLU(Layer):
         return input_shape
 
 get_custom_objects().update({'SineReLU': SineReLU})
+
+
+class Act1(Layer):
+    """
+    y=x^2
+    """
+    def __init__(self, epsilon=0.0055, **kwargs):
+        super(Act1, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.epsilon = K.cast_to_floatx(epsilon)
+
+    def build(self, input_shape):
+        self.scale = np.exp(np.sqrt(np.pi))
+        super(Act1, self).build(input_shape)
+
+    def call(self, Z):
+        m = self.epsilon * (K.pow(Z, 2)) * self.scale
+        A = K.maximum(m, Z)
+        return A
+
+    def get_config(self):
+        config = {'epsilon': float(self.epsilon)}
+        base_config = super(Act1, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
+
+get_custom_objects().update({'act1': Act1})
+
+
+class Act2(Layer):
+    """
+    y=x^(1/3)
+    """
+    def __init__(self, epsilon=0.0055, **kwargs):
+        super(Act2, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.epsilon = K.cast_to_floatx(epsilon)
+
+    def build(self, input_shape):
+        self.scale = np.exp(np.sqrt(np.pi))
+        super(Act2, self).build(input_shape)
+
+    def call(self, Z):
+        m = self.epsilon * (K.pow(Z, 1/3)) * self.scale
+        A = K.maximum(m, Z)
+        return A
+
+    def get_config(self):
+        config = {'epsilon': float(self.epsilon)}
+        base_config = super(Act2, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
+
+get_custom_objects().update({'act2': Act2})
+
+
+class Act3(Layer):
+    """
+    y=log|x|
+    """
+    def __init__(self, epsilon=0.0055, **kwargs):
+        super(Act3, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.epsilon = K.cast_to_floatx(epsilon)
+
+    def build(self, input_shape):
+        self.scale = np.exp(np.sqrt(np.pi))
+        super(Act3, self).build(input_shape)
+
+    def call(self, Z):
+        m = self.epsilon * (K.log(K.abs(Z))) * self.scale
+        A = K.maximum(m, Z)
+        return A
+
+    def get_config(self):
+        config = {'epsilon': float(self.epsilon)}
+        base_config = super(Act3, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
+
+get_custom_objects().update({'act3': Act3})
+
+
+class Act4(Layer):
+    """
+    y=log(1/|x|)
+    """
+    def __init__(self, epsilon=0.0055, **kwargs):
+        super(Act4, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.epsilon = K.cast_to_floatx(epsilon)
+
+    def build(self, input_shape):
+        self.scale = np.exp(np.sqrt(np.pi))
+        super(Act4, self).build(input_shape)
+
+    def call(self, Z):
+        m = self.epsilon * (K.log(K.pow(K.abs(Z), -1))) * self.scale
+        A = K.maximum(m, Z)
+        return A
+
+    def get_config(self):
+        config = {'epsilon': float(self.epsilon)}
+        base_config = super(Act4, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
+
+get_custom_objects().update({'act4': Act4})
+
+
+class Act5(Layer):
+    """
+    y=x^(1/2)
+    """
+    def __init__(self, epsilon=0.0055, **kwargs):
+        super(Act5, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.epsilon = K.cast_to_floatx(epsilon)
+
+    def build(self, input_shape):
+        self.scale = np.exp(np.sqrt(np.pi))
+        super(Act5, self).build(input_shape)
+
+    def call(self, Z):
+        m = self.epsilon * (K.log(K.pow(K.abs(Z), -1))) * self.scale
+        A = K.maximum(m, Z)
+        return A
+
+    def get_config(self):
+        config = {'epsilon': float(self.epsilon)}
+        base_config = super(Act5, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
+
+get_custom_objects().update({'act5': Act5})
+
