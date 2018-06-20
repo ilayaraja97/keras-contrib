@@ -617,7 +617,7 @@ class Act8(Layer):
         super(Act8, self).build(input_shape)
 
     def call(self, Z):
-        m = self.epsilon * (K.tanh(K.exp(K.sum(Z, -0.6)))) * self.scale
+        m = self.epsilon * (K.tanh(K.exp(Z - 0.6))) * self.scale
         A = K.maximum(m, Z)
         return A
 
@@ -745,7 +745,7 @@ class Act12(Layer):
         super(Act12, self).build(input_shape)
 
     def call(self, Z):
-        n = K.sum(K.relu(K.log(K.sum(Z, 1))), K.prod(-1, K.relu(K.sum(1, K.prod(-1, K.exp(Z))))))
+        n = K.relu(K.log(Z + 1)), -K.relu(1 + -K.exp(Z))
         m = self.epsilon * n * self.scale
         A = K.maximum(m, Z)
         return A
