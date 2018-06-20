@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 
 setup(name='keras_contrib',
-      version='2.0.8',
+      version='2.0.9',
       description='Keras Deep Learning for Python, Community Contributions',
       author='Fariz Rahman',
       author_email='farizrahman4u@gmail.com',
