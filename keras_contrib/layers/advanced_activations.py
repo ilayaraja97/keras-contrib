@@ -680,7 +680,7 @@ class Act10(Layer):
 
     def call(self, Z):
         n = tf.clip_by_value(Z/2,
-                             tf.convert_to_tensor(-1, Z.dtype.base_dtype, tf.convert_to_tensor(1, Z.dtype.base_dtype)))
+                             tf.convert_to_tensor(-1., Z.dtype.base_dtype), tf.convert_to_tensor(1., Z.dtype.base_dtype))
         m = self.epsilon * n * self.scale
         A = K.maximum(m, Z)
         return A
@@ -713,7 +713,7 @@ class Act11(Layer):
 
     def call(self, Z):
         n = tf.clip_by_value(Z,
-                             tf.convert_to_tensor(-1, Z.dtype.base_dtype, tf.convert_to_tensor(1, Z.dtype.base_dtype)))
+                             tf.convert_to_tensor(-1., Z.dtype.base_dtype), tf.convert_to_tensor(1., Z.dtype.base_dtype))
         m = self.epsilon * n * self.scale
         A = K.maximum(m, Z)
         return A
