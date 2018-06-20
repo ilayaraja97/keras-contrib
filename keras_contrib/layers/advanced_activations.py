@@ -745,7 +745,7 @@ class Act12(Layer):
         super(Act12, self).build(input_shape)
 
     def call(self, Z):
-        n = K.relu(K.log(Z + 1)), -K.relu(1 + -K.exp(Z))
+        n = K.relu(K.log(Z + 1)) - K.relu(1 - K.exp(Z))
         m = self.epsilon * n * self.scale
         A = K.maximum(m, Z)
         return A
