@@ -453,7 +453,7 @@ get_custom_objects().update({'act2': Act2})
 
 class Act3(Layer):
     """
-    y=log|x|
+    y=log(|x|+1)
     """
 
     def __init__(self, epsilon=0.0055, **kwargs):
@@ -466,7 +466,7 @@ class Act3(Layer):
         super(Act3, self).build(input_shape)
 
     def call(self, Z):
-        m = self.epsilon * (K.log(K.abs(Z))) * self.scale
+        m = self.epsilon * (K.log(K.abs(Z)+1)) * self.scale
         A = K.maximum(m, Z)
         return A
 
